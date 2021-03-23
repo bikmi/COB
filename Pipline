@@ -1,0 +1,9 @@
+anvio
+anvio only recognize suffix .fa and .fasta file 
+rename 's/\.1_(.+)fna$/.fasta/' ./*
+for i in *fasta;anvi-script-FASTA-to-contigs-db $i
+phylogenetic analysis
+anvi-gen-genomes-storage -e external_genomes.txt -o Nitrospira-GENOMES.db
+anvi-get-sequences-for-hmm-hits --external-genomes external_genomes.txt --hmm-source Bacteria_71 -o concatenated-proteins.fa --return-best-hit --get-aa-sequences --concatenate
+
+
