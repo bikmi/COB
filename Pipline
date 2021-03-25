@@ -5,5 +5,7 @@ for i in *fasta;anvi-script-FASTA-to-contigs-db $i
 phylogenetic analysis
 anvi-gen-genomes-storage -e external_genomes.txt -o Nitrospira-GENOMES.db
 anvi-get-sequences-for-hmm-hits --external-genomes external_genomes.txt --hmm-source Bacteria_71 -o concatenated-proteins.fa --return-best-hit --get-aa-sequences --concatenate
+anvi-gen-phylogenomic-tree -f concatenated-proteins.fa -o phylogenomic-tree.txt
+anvi-interactive -p Nitrospira-GENOMES.db -t phylogenomic-tree.txt --title "Nitrospira Phylogenetic Tree" --manual 
 
 
