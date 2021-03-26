@@ -8,6 +8,8 @@ anvi-get-sequences-for-hmm-hits --external-genomes external_genomes.txt --hmm-so
 anvi-gen-phylogenomic-tree -f concatenated-proteins.fa -o phylogenomic-tree.txt
 anvi-interactive -p Nitrospira-GENOMES.db -t phylogenomic-tree.txt --title "Nitrospira Phylogenetic Tree" --manual 
 
+nohup raxmlHPC-PTHREADS-AVX2 -f a -x 12345 -p 12345 -# 1000 -m PROTGAMMAWAG -s concatenated-proteins.fa -n Nitrospira-raxml-1 -T 20 &
+
 pangenome analysis
 for i in *db;anvi-run-ncbi-cogs -c $i --sensitive --search-with diamond -T 20
 anvi-gen-genomes-storage -e COB_genomes.txt -o COB-GENOMES.db
