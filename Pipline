@@ -1,9 +1,34 @@
 conda activate anvio-6.2
-anvio only recognize suffix .fa and .fasta file 
+###anvio only recognize suffix .fa and .fasta file 
 rename 's/\.1_(.+)fna$/.fasta/' ./*
 for i in *fasta;anvi-script-FASTA-to-contigs-db $i
-phylogenetic analysis
+###phylogenetic analysis
 anvi-gen-genomes-storage -e external_genomes.txt -o Nitrospira-GENOMES.db
+-------------------------------------
+name	contigs_db_path
+GCA_003152135	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_003152135.db
+GCA_003135435	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_003135435.db
+GCA_002869885	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_002869885.db
+GCA_002869925	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_002869925.db
+GCA_002331625	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_002331625.db
+GCA_002483475	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_002483475.db
+GCA_002083355	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_002083355.db
+GCA_002420045	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_002420045.db
+GCA_003529185	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_003529185.db
+GCA_002420115	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_002420115.db
+GCA_002254365	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_002254365.db
+GCA_001458735	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_001458735.db
+GCA_002083365	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_002083365.db
+GCA_001464735	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_001464735.db
+GCA_001458775	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_001458775.db
+GCA_014058405	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_014058405.db
+GCA_002331335	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_002331335.db
+GCA_002451055	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_002451055.db
+GCA_001458695	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_001458695.db
+GCA_002083405	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_002083405.db
+GCA_002083565	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/GCA_002083565.db
+S9_bin_98	/home/disk2/zry/JR/coassembly/Nitrospira/phylogenetic/S9_bin_98.db
+-------------------------------------
 anvi-get-sequences-for-hmm-hits --external-genomes external_genomes.txt --hmm-source Bacteria_71 -o concatenated-proteins.fa --return-best-hit --get-aa-sequences --concatenate
 anvi-gen-phylogenomic-tree -f concatenated-proteins.fa -o phylogenomic-tree.txt
 anvi-interactive -p Nitrospira-GENOMES.db -t phylogenomic-tree.txt --title "Nitrospira Phylogenetic Tree" --manual 
