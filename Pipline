@@ -40,3 +40,17 @@ for i in *db;anvi-run-ncbi-cogs -c $i --sensitive --search-with diamond -T 20
 anvi-gen-genomes-storage -e COB_genomes.txt -o COB-GENOMES.db
 anvi-pan-genome -g COB-GENOMES.db --project-name "COB-PAN" --output-dir COB-PAN --num-threads 20 --minbit 0.5 --mcl-inflation 10 --enforce-hierarchical-clustering
 anvi-display-pan -g COB-GENOMES.db -p COB-PAN/COB-PAN-PAN.db --title "COB Pan" 
+
+
+事情要接着S9——bin98来说，因为bin98在系统发育树和ANI上基本确定是和kreftii近似，但是amoCAB的cluster拼接不完整。
+下载了kreftii’的全基因组，以它为ref，创建database
+makeblastdb -in kreftii.fasta -dbtype nucl -parse_seqids
+通过blastn提取样本9质控好的短序列中和kreftii相似度在95%的短序列，
+blastn -db kreftii.fasta -query /home/disk2/zry/JR/Trimmomatic_out/9/read.fas -out results.out -outfmt 6 -evalue 0.00001 -perc_identity 95 -num_threads 30
+在通过这些序列的名称，借助bbmap tools中的filterbyname.sh成对的提取hit序列
+/home/server/bbmap/filterbyname.sh in=/home/disk2/zry/JR/Trimmomatic_out/9/forward.clean.paired.fq in2=/home/disk2/zry/JR/Trimmomatic_out/9/reverse.clean.paired.fq out=read_1.fq out2=read_2.fq names=names.txt include=t
+ 
+再用spades对这些提取的序列进行meta模式下的assembly拼接，
+/home/server/SPAdes-3.12.0-Linux/bin/spades.py -1 read_1.fq -2 read_2.fq --meta -o spades.out -t 30 -k 21,33,55,75,101,125
+ 
+最终我们将该bin98 的amoCAB cluster拼接完整。
