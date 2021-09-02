@@ -1,4 +1,4 @@
-anvio
+conda activate anvio-6.2
 anvio only recognize suffix .fa and .fasta file 
 rename 's/\.1_(.+)fna$/.fasta/' ./*
 for i in *fasta;anvi-script-FASTA-to-contigs-db $i
